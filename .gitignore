@@ -1,0 +1,10 @@
+# secrets
+.credentials
+
+# Stuff
+archive
+*swp
+
+# Python specifiqs
+env
+*pyc
