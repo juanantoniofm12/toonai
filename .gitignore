@@ -4,7 +4,9 @@
 # Stuff
 archive
 *swp
+*log
 
 # Python specifiqs
 env
 *pyc
+
