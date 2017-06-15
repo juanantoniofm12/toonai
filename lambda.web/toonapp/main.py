@@ -6,24 +6,9 @@ from flask import Flask, url_for, render_template, request, \
 from toonapp import app
 
 
-@app.route('/event', defaults={"path": ""})
-@app.route('/event/<path:whatever>')
-def event_listener(whatever):
-    app.logger.info(whatever)
-    """
-    a sample method of a catch-all path
-    """
-    return "You went to {0}".format(whatever)
-
-
 @app.route('/')
 def index():
     return "You are at the homepage!"
-
-
-@app.route('/redirect-to-<function>')
-def pointless_redirect(function=None):
-    return redirect(url_for(function))
 
 
 @app.errorhandler(404)
@@ -47,3 +32,22 @@ def login_handler():
         else:
             error = "Invalid username/password!"
     return render_template('login.html', error=error)
+
+@app.route("/v1/toonstuff", methods=["POST", "PUT"])
+def toon_handle():
+    """receive anything coming from the ai api as webhook"""
+    return "foobarcrap"
+    data = {
+             "args":request.args,
+             #"json": request.body
+           }
+    json = request.get_json(silent=True)
+    return render_template('base.html')
+    #return render_template('json.html', data=data)
+
+@app.route("/foobar",methods=["GET","POST"])
+def wtpost(uuid= "aoeuaoeu", *args, **kwargs):
+    """dummy test"""
+    #content = request.get_json(silent=True)
+    #print content
+    return uuid

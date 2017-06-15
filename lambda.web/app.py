@@ -16,4 +16,5 @@ if __name__ == '__main__':
         app.logger.addHandler(file_handler)
 
     app.debug = app.config['DEBUG']
+    app.secret_key = 'super secret key'
     app.run()
