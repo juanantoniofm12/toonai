@@ -96,7 +96,11 @@ def toon_handler():
     try:
         c_parameters = request_json["result"]["parameters"]
         c_action = request_json["result"]["action"]
-        interesting_stuff = {"parameters": c_parameters, "action":c_action}
+        c_headers = dict(request.headers)
+        interesting_stuff = {
+            "parameters": c_parameters,
+            "action":c_action,
+            "headers": c_headers}
 
     except ValueError as e:
         pass
