@@ -27,15 +27,44 @@ class test_toonstuff(BT):
             print "Loaded some data"
             print len(self.request_data)
 
+        self.headers = {
+            'Content-Type': "application/json",
+            "secret" : "toon-secret",
+            "key" : "toon-key",
+            "blabla" : "fofofofo"
+        }
+
 
     def test_basic(self):
-        assert len(self.request_data) > 2 is True
+        rv = self.app.post(
+            "/v1/mirror",
+            data=self.request_data,
+            headers=self.headers
+        )
+        response_body =  rv.response.next()
+        assert rv.status == "200 OK"
+        assert rv.content_type == "application/json"
+        shared = set(json.loads(self.request_data)) & set(json.loads(response_body))
+        assert len(shared) > 0
+
+
+    def test_respond_to_heat_on(self):
+        """
+        Try t ofind a heat on command
+        """
         rv = self.app.post(
             "/v1/toonstuff",
-            data=dict(self.request_data)
+            data = self.request_data,
+            headers = self.headers
         )
+        response_body = rv.response.next()
+        assert rv.status == "200 OK"
+        assert rv.content_type == "application/json"
+        response_data = json.loads(response_body)
+        print [ x for x in response_data.iteritems()]
+        assert True is False
 
-        assert rv.data is True
+
 
 #@app.route("/v1/toonstuff", methods=["POST", "PUT"])
 if __name__ == '__main__':
