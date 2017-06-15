@@ -16,6 +16,12 @@ def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
 
+# CSRF protection needs a little bit of reading and adjustment. lets go for now.
+#@csrf.error_handler
+#def csrf_error(reason):
+#    return render_template('csrf_error.html', reason=reason)
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -36,13 +42,16 @@ def login_handler():
 @app.route("/v1/toonstuff", methods=["POST", "PUT"])
 def toon_handle():
     """receive anything coming from the ai api as webhook"""
-    return "foobarcrap"
-    data = {
+    request_args = {
              "args":request.args,
              #"json": request.body
            }
-    json = request.get_json(silent=True)
-    return render_template('base.html')
+    request_json = request.get_json(silent=True)
+    try:
+        interesting_stuff = request_json["result"]
+    except KeyError as e:
+        interesting_stuff = {" No ": "Interesting stuff"}
+    return render_template('json.html', data=interesting_stuff)
     #return render_template('json.html', data=data)
 
 @app.route("/foobar",methods=["GET","POST"])
