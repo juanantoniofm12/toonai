@@ -6,4 +6,8 @@ help:
 deploy-dev:
 	@zappa deploy dev
 
+run-local:
+	@env/bin/python app.py
 
+unit-test:
+	@env/bin/nosetests
