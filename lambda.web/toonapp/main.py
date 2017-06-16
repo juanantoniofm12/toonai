@@ -5,6 +5,7 @@ from flask import Flask, url_for, render_template, request, \
     redirect, abort, session, g, flash, Markup, jsonify
 import json
 from toonapp import app
+from toonapp.morestuff import get_header
 
 
 @app.route('/')
@@ -96,7 +97,14 @@ def toon_handler():
     try:
         c_parameters = request_json["result"]["parameters"]
         c_action = request_json["result"]["action"]
-        c_headers = dict(request.headers)
+        all_headers = dict(request.headers)
+        c_headers = {
+            "secret": get_header(all_headers,"secret"),
+            "username": get_header(all_headers,"username"),
+            "key": get_header(all_headers,"key"),
+            "password": get_header(all_headers,"password"),
+            "User": get_header(all_headers,"User"),
+        }
         interesting_stuff = {
             "parameters": c_parameters,
             "action":c_action,

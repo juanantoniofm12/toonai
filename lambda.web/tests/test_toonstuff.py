@@ -62,7 +62,7 @@ class test_toonstuff(BT):
         assert rv.content_type == "application/json"
         response_data = json.loads(response_body)
         print [ x for x in response_data.iteritems()]
-        assert True is False
+        assert len(response_body) > 2
 
 
 

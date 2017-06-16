@@ -1,0 +1,34 @@
+{
+  "id": "fb7c4c25-afb6-4581-a737-75c00dce8883",
+  "timestamp": "2017-06-15T23:02:52.591Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "turn the heating on",
+    "action": "heatingonaction",
+    "actionIncomplete": false,
+    "parameters": {},
+    "contexts": [],
+    "metadata": {
+      "intentId": "beec552e-974d-4352-984b-535abb8d3973",
+      "webhookUsed": "true",
+      "webhookForSlotFillingUsed": "false",
+      "webhookResponseTime": 538,
+      "intentName": "heating on"
+    },
+    "fulfillment": {
+      "messages": [
+        {
+          "type": 0,
+          "speech": "I'll make sure you feel warm"
+        }
+      ]
+    },
+    "score": 1
+  },
+  "status": {
+    "code": 200,
+    "errorType": "success"
+  },
+  "sessionId": "7905137b-d087-4526-af12-794649c98607"
+}
